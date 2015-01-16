@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>autocomplete</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+
+    <script language="JavaScript" type="text/javascript">
+        function initAutoComplete(json){
+            console.log(json);
+            $("#website").autocomplete(json , {
+                minChars:1,
+                width:260,
+                dataType:"json",
+                matchContains: true,
+                formatItem: function(row, i, max) {
+                    console.log("123");
+                    return row.tel + " <" + row.name + "> ["+row.cg_name+"]";
+                },
+                formatMatch: function(row, i, max) {
+                    console.log(row);
+                    return row.tel;
+                },
+                formatResult: function(row) {
+                    console.log(row);
+                    return row.tel;
+                }
+            });
+        }
+        $(document).ready(function(){
+            $("#website").focus(function(){
+                $.post("/jsonservlet",{},function(data){
+                    initAutoComplete(data);
+                },"json");
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <p>
+        <label>Web Site:</label>
+        <input type="text" id="website"/>
+        <input type="button" id="getvalue" value="Get Value"/>
+    </p>
+
+    <div id="content"></div>
+
+</body>
+</html>

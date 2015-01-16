@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>autocomplete</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+
+    <script language="JavaScript" type="text/javascript">
+        $(document).ready(function(){
+            $("#website").autocomplete({
+               source:"/jsonservlet",
+                minLength:1
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <p>
+        <label>Web Site:</label>
+        <input type="text" id="website"/>
+        <input type="button" id="getvalue" value="Get Value"/>
+    </p>
+
+    <div id="content"></div>
+
+</body>
+</html>

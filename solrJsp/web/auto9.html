@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>autocomplete</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript">
+        var v = 1;
+      $(document).ready(function () {
+                  $.ajax({
+                          type: "POST",
+                             contentType: "application/json",
+                            url: "/phone",
+                            data: "{}",
+                              dataType: "json",
+                              success: function (msg) {
+                                  console.log(msg);
+                              var datas = eval('(' + msg.d + ')');
+                              $("#txtIput").autocomplete(datas, {
+                                  formatItem: function (row, i, max) {
+                                          return "<table width='400px'><tr><td align='left'>" + row.Key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>约" + row.Value + "个宝贝</font>&nbsp;&nbsp;</td></tr></table>";
+                                      },
+                                  formatMatch: function(row, i, max){
+                                      return row.Key;
+                                      }
+                              });
+                     },
+                      error:function(){
+                          console.log("34");
+                      }
+                });
+           });
+     </script>
+   </head>
+ <body>
+     <form id="form1">
+        <div>
+        <center>
+            <input type="text" ID="txtIput" Width="400px">
+        </center>
+       </div>
+       </form>
+ </body>
+ </html>

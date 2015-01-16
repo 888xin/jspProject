@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>autocomplete</title>
+    <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var json = [
+                {name:'Peter pan',to:'Peter@pan.de'},
+                {name:'Molly',to:'molly@yahoo.com'},
+                {name:'Forneria',to:'live@japan.jp'}
+            ];
+            $("#tags").autocomplete(json,{
+                minChars:0,
+                max:12,
+                autoFill:true,
+                mustMatch:true,
+                matchContains:true,
+                scrollHeight:220,
+                highlight:false,
+                width:320,
+                formatItem:function(row){
+                    return row.to+':'+row.name;
+                },
+                formatResult: function (row) {
+                    return row.to;
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+
+<label>本地数据</label><input id="tags" type="text" style="width:300px;height: 30px;">
+
+
+</body>
+</html>
